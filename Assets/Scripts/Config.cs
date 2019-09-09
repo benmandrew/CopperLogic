@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Config : MonoBehaviour
 {
     public static string graph_file_path = "Assets/Resources/graph.json";
