@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f2e1166225e2f4caeb21caabb823d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 8
+  id: 6
   value: 0
   incoming_neighbours: []
+  connection_prefab: {fileID: 5657739932829349853, guid: 70d3856f1b1192d4ba69ebe44e93e463,
+    type: 3}
 --- !u!212 &5873099746716729189
 SpriteRenderer:
   m_ObjectHideFlags: 0
