@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+[ExecuteInEditMode]
 public abstract class Gate : MonoBehaviour {
     static int top_id = 0;
 
@@ -15,7 +16,7 @@ public abstract class Gate : MonoBehaviour {
     private Color on_colour = Color.green;
 
     public GameObject connection_prefab;
-    private GameObject connection;
+    protected List<Connection> connections = new List<Connection>();
 
     private void Awake() {
         id = top_id;
@@ -23,9 +24,13 @@ public abstract class Gate : MonoBehaviour {
         if (connection_prefab == null) {
             throw new System.Exception("Connection prefab must be filled out");
         }
+        Debug.Log(incoming_neighbours);
         if (Application.isPlaying) {
-            connection = Instantiate(connection_prefab, transform.position, Quaternion.identity);
-            connection.transform.parent = transform;
+            for (int i = 0; i < incoming_neighbours.Count; i++) {
+                GameObject connection_gameobject = Instantiate(connection_prefab, transform.position, Quaternion.identity);
+                connection_gameobject.transform.parent = transform;
+                connections.Add(connection_gameobject.GetComponent<Connection>());
+            }
         }
     }
 
@@ -35,9 +40,10 @@ public abstract class Gate : MonoBehaviour {
     
     public void draw_connections() {
         for (int i = 0; i < incoming_neighbours.Count; i++) {
-            connection.GetComponent<Connection>().update_position(
+            connections[i].update(
                 incoming_neighbours[i].transform.position,
-                transform.position
+                transform.position,
+                incoming_neighbours[i].get_value()
             );
         }
     }

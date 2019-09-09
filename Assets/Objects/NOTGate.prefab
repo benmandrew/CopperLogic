@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4237950922213680424}
   - component: {fileID: 3285766216955042401}
   - component: {fileID: 7647845828967941443}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NOTGate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,15 +39,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6620599154969650377}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17e94d9ec840fc94a9cf9decf8b995b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 11
+  id: 2
   value: 0
   incoming_neighbours: []
-  connection_prefab: {fileID: 5657739932829349853, guid: 70d3856f1b1192d4ba69ebe44e93e463,
+  connection_prefab: {fileID: 2382688235597207822, guid: 70d3856f1b1192d4ba69ebe44e93e463,
     type: 3}
 --- !u!212 &7647845828967941443
 SpriteRenderer:

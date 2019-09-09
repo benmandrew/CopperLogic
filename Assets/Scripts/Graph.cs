@@ -4,15 +4,17 @@ using UnityEngine;
 using System.IO;
 
 
+[ExecuteInEditMode]
 public class Graph : MonoBehaviour {
     public List<Gate> gates;
     public Gate root;
 
     private void Start() {
+        /*
         StreamReader reader = new StreamReader(Config.graph_file_path);
         string json = reader.ReadToEnd();
         reader.Close();
-        //get_value();
+        */
     }
 
     bool get_value() {
@@ -40,7 +42,7 @@ public class Graph : MonoBehaviour {
         writer.WriteLine(str);
         writer.Close();
     }
-
+    
     private void FixedUpdate() {
         for (int i = 0; i < gates.Count; i++) {
             gates[i].draw_connections();
