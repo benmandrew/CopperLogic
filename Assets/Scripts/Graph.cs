@@ -6,6 +6,7 @@ using System.IO;
 
 [ExecuteInEditMode]
 public class Graph : MonoBehaviour {
+    public GameObject gate_container;
     public List<Gate> gates;
     public Gate root;
 
@@ -15,6 +16,18 @@ public class Graph : MonoBehaviour {
         string json = reader.ReadToEnd();
         reader.Close();
         */
+        if (Application.isPlaying) {
+            get_gates();
+        }
+    }
+
+    void get_gates() {
+        if (gate_container == null) {
+            throw new System.Exception("Graph must be linked to the gate container!");
+        }
+        foreach (Transform child in gate_container.transform) {
+            gates.Add(child.gameObject.GetComponent<Gate>());
+        }
     }
 
     bool get_value() {

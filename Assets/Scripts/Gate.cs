@@ -15,6 +15,9 @@ public abstract class Gate : MonoBehaviour {
     private Color off_colour = Color.black;
     private Color on_colour = Color.green;
 
+    private Vector2 connection_offset = new Vector2(0.1f, 0.0f);
+    private Vector2 connection_array_max_offset = new Vector2(0.0f, 0.5f);
+
     public GameObject connection_prefab;
     protected List<Connection> connections = new List<Connection>();
 
@@ -24,7 +27,6 @@ public abstract class Gate : MonoBehaviour {
         if (connection_prefab == null) {
             throw new System.Exception("Connection prefab must be filled out");
         }
-        Debug.Log(incoming_neighbours);
         if (Application.isPlaying) {
             for (int i = 0; i < incoming_neighbours.Count; i++) {
                 GameObject connection_gameobject = Instantiate(connection_prefab, transform.position, Quaternion.identity);
@@ -39,13 +41,27 @@ public abstract class Gate : MonoBehaviour {
     public abstract string serialise();
     
     public void draw_connections() {
+        incoming_neighbours.Sort(sort_by_height);
         for (int i = 0; i < incoming_neighbours.Count; i++) {
             connections[i].update(
-                incoming_neighbours[i].transform.position,
-                transform.position,
+                incoming_neighbours[i].get_output_position(),
+                get_input_position(i, incoming_neighbours.Count),
                 incoming_neighbours[i].get_value()
             );
         }
+    }
+
+    static int sort_by_height(Gate g0, Gate g1) {
+        return g0.transform.position.y.CompareTo(g1.transform.position.y);
+    }
+
+    public Vector2 get_input_position(int input_index, int input_num) {
+        Vector2 array_offset = connection_array_max_offset * ((input_index - ((input_num - 1.0f) / 2.0f)) / input_num);
+        return new Vector2(transform.position.x, transform.position.y) - connection_offset + array_offset;
+    }
+
+    public Vector2 get_output_position() {
+        return new Vector2(transform.position.x, transform.position.y) + connection_offset;
     }
 
     protected string internal_serialise(string type) {

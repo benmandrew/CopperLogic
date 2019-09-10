@@ -135,12 +135,12 @@ PrefabInstance:
     - target: {fileID: 2037593875581460780, guid: 09c980b9a8d78c94286e1b216d2ff1b7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.01
       objectReference: {fileID: 0}
     - target: {fileID: 2037593875581460780, guid: 09c980b9a8d78c94286e1b216d2ff1b7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.93
       objectReference: {fileID: 0}
     - target: {fileID: 2037593875581460780, guid: 09c980b9a8d78c94286e1b216d2ff1b7,
         type: 3}
@@ -190,12 +190,12 @@ PrefabInstance:
     - target: {fileID: 7096473463689456144, guid: 09c980b9a8d78c94286e1b216d2ff1b7,
         type: 3}
       propertyPath: incoming_neighbours.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7096473463689456144, guid: 09c980b9a8d78c94286e1b216d2ff1b7,
         type: 3}
       propertyPath: id
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7096473463689456144, guid: 09c980b9a8d78c94286e1b216d2ff1b7,
         type: 3}
@@ -207,6 +207,11 @@ PrefabInstance:
       propertyPath: incoming_neighbours.Array.data[1]
       value: 
       objectReference: {fileID: 1229525002}
+    - target: {fileID: 7096473463689456144, guid: 09c980b9a8d78c94286e1b216d2ff1b7,
+        type: 3}
+      propertyPath: incoming_neighbours.Array.data[2]
+      value: 
+      objectReference: {fileID: 1137605522}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09c980b9a8d78c94286e1b216d2ff1b7, type: 3}
 --- !u!1 &255813878
@@ -260,12 +265,12 @@ PrefabInstance:
     - target: {fileID: 4237950922213680424, guid: 6084328c239b7bb4bab94c822968be54,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 0.92
       objectReference: {fileID: 0}
     - target: {fileID: 4237950922213680424, guid: 6084328c239b7bb4bab94c822968be54,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -0.31
       objectReference: {fileID: 0}
     - target: {fileID: 4237950922213680424, guid: 6084328c239b7bb4bab94c822968be54,
         type: 3}
@@ -880,13 +885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5755669476b8f458315023ebd199c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gates:
-  - {fileID: 868528451}
-  - {fileID: 861629546}
-  - {fileID: 1229525002}
-  - {fileID: 1711271776}
-  - {fileID: 0}
-  - {fileID: 1137605522}
+  gate_container: {fileID: 255813878}
+  gates: []
   root: {fileID: 0}
 --- !u!4 &1743388953
 Transform:
@@ -918,7 +918,7 @@ PrefabInstance:
     - target: {fileID: 1726255330965287090, guid: fd8e3ec0afe1c4a4488845611f2d7c74,
         type: 3}
       propertyPath: gates.Array.size
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1726255330965287090, guid: fd8e3ec0afe1c4a4488845611f2d7c74,
         type: 3}
