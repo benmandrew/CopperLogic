@@ -41,7 +41,7 @@ public abstract class Gate : MonoBehaviour {
     public abstract string serialise();
     
     public void draw_connections() {
-        incoming_neighbours.Sort(sort_by_height);
+        incoming_neighbours.Sort(compare_neighbours);
         for (int i = 0; i < incoming_neighbours.Count; i++) {
             connections[i].update(
                 incoming_neighbours[i].get_output_position(),
@@ -51,7 +51,7 @@ public abstract class Gate : MonoBehaviour {
         }
     }
 
-    static int sort_by_height(Gate g0, Gate g1) {
+    static int compare_neighbours(Gate g0, Gate g1) {
         return g0.transform.position.y.CompareTo(g1.transform.position.y);
     }
 

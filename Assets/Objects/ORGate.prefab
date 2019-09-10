@@ -10,10 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 469517259848774826}
   - component: {fileID: 8090172677495542955}
+  - component: {fileID: 5612440381640212110}
   - component: {fileID: 2365378781639815281}
+  - component: {fileID: 3500751314399580874}
   m_Layer: 8
   m_Name: ORGate
-  m_TagString: Untagged
+  m_TagString: Gate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,11 +46,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5455d45c7afa52e4286825686404ef89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3
+  id: 15
   value: 0
   incoming_neighbours: []
   connection_prefab: {fileID: 2382688235597207822, guid: 70d3856f1b1192d4ba69ebe44e93e463,
     type: 3}
+--- !u!114 &5612440381640212110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5083696502280167813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589149af1f95b2643bbdfbd362674def, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &2365378781639815281
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -99,3 +113,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &3500751314399580874
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5083696502280167813}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.6, y: 0.52}
+    newSize: {x: 0.52, y: 0.62}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.14345248, y: 0.17511165}
+      - {x: -0.062916376, y: 0.26}
+      - {x: -0.29999998, y: 0.26}
+      - {x: -0.29999998, y: 0.21}
+      - {x: -0.27008936, y: 0.16165927}
+      - {x: -0.22533502, y: 0.0034077428}
+      - {x: -0.29999998, y: -0.26}
+      - {x: -0.058028057, y: -0.25502232}
+      - {x: 0.058117457, y: -0.215201}
+      - {x: 0.21838543, y: -0.13502233}
+      - {x: 0.29999998, y: -0.049999997}
+      - {x: 0.29999998, y: 0.06}
