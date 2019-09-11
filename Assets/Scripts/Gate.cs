@@ -11,12 +11,9 @@ public abstract class Gate : MonoBehaviour {
     public bool value = false;
     protected bool value_calculated = false;
     public List<Gate> incoming_neighbours;
-    
-    private Color off_colour = Color.black;
-    private Color on_colour = Color.green;
 
-    private Vector2 connection_offset = new Vector2(0.1f, 0.0f);
-    private Vector2 connection_array_max_offset = new Vector2(0.0f, 0.5f);
+    private Vector2 connection_offset = new Vector2(0.3f, 0.0f);
+    private Vector2 connection_array_max_offset = new Vector2(0.0f, 1.0f);
 
     public GameObject connection_prefab;
     protected List<Connection> connections = new List<Connection>();

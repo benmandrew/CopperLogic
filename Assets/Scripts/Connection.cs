@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(LineRenderer))]
 public class Connection : MonoBehaviour {
     
     private LineRenderer rend;
     private bool is_on = false;
-    public Material on_mat;
-    public Material off_mat;
+
+    private static Color on_colour = new_colour(146, 161, 122); // Meadow green
+    private static Color off_colour = new_colour(255, 253, 240); // Pale white
 
     public void Start() {
         rend = GetComponent<LineRenderer>();
+        rend.startColor = off_colour;
+        rend.endColor = off_colour;
     }
 
     public void update(Vector2 input_pos, Vector2 output_pos, bool is_on_new) {
@@ -39,13 +43,19 @@ public class Connection : MonoBehaviour {
         }
         is_on = is_on_new;
         if (is_on_new) {
-            rend.material = on_mat;
+            rend.startColor = on_colour;
+            rend.endColor = on_colour;
         } else {
-            rend.material = off_mat;
+            rend.startColor = off_colour;
+            rend.endColor = off_colour;
         }
     }
 
     public void set_visibility(bool visible) {
         rend.enabled = visible;
+    }
+
+    private static Color new_colour(int r, int g, int b) {
+        return new Color(r / 255.0f, g / 255.0f, b / 255.0f);
     }
 }

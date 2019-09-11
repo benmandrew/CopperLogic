@@ -22,11 +22,8 @@ public class ClickManager : MonoBehaviour {
     void mouse_down() {
         Vector2 mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mouse_pos, Vector2.zero);
-        Debug.Log(hit);
         if (hit.collider != null) {
-            Debug.Log(hit.collider);
             if (hit.collider.gameObject.GetComponent<Gate>() != null) {
-                Debug.Log("OBJ");
                 clicked_gate = hit.transform.gameObject.GetComponent<Draggable>();
                 clicked_gate.set_mouse_start_pos(hit.point);
                 clicked_gate.select(true);

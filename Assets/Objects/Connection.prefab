@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1248228300871525191}
-  - component: {fileID: 1235091921871313100}
   - component: {fileID: 2415952367756731340}
+  - component: {fileID: 1235091921871313100}
   m_Layer: 9
   m_Name: Connection
   m_TagString: Untagged
@@ -32,6 +32,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2415952367756731340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2382688235597207822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a75a6a6ddaf244fa03b18dccc8ad73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &1235091921871313100
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -41,8 +53,8 @@ LineRenderer:
   m_GameObject: {fileID: 2382688235597207822}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -75,7 +87,7 @@ LineRenderer:
   - {x: 1, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.2
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -128,17 +140,3 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &2415952367756731340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2382688235597207822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81a75a6a6ddaf244fa03b18dccc8ad73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  on_mat: {fileID: 2100000, guid: 18ba0cd1dcdb5d54eb9ae24cda49c67e, type: 2}
-  off_mat: {fileID: 2100000, guid: 8425c3a0d27656d4a93c20db0b9763de, type: 2}

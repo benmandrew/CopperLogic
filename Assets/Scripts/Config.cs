@@ -11,7 +11,7 @@ public class Config : MonoBehaviour
 
     void Awake() {
         if (config != null) {
-            GameObject.Destroy(config);
+            Destroy(config);
         } else {
             config = this;
         }
