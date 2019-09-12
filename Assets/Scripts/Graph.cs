@@ -26,7 +26,9 @@ public class Graph : MonoBehaviour {
             throw new System.Exception("Graph must be linked to the gate container!");
         }
         foreach (Transform child in gate_container.transform) {
-            gates.Add(child.gameObject.GetComponent<Gate>());
+            if (child.gameObject.activeSelf) {
+                gates.Add(child.gameObject.GetComponent<Gate>());
+            }
         }
     }
 

@@ -3,6 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+class Comp : IComparer<Gate> {
+
+    private Vector2 gate_pos;
+
+    public Comp(Vector2 new_gate_pos) {
+        gate_pos = new_gate_pos;
+    }
+
+    public void set_pos(Vector2 new_gate_pos) {
+        if (gate_pos.Equals(new_gate_pos)) {
+            return;
+        }
+        gate_pos = new_gate_pos;
+    }
+
+    private float reverse_angle(float angle) {
+        if (angle >= 0) {
+            return Mathf.PI - angle;
+        }
+        return -(Mathf.PI + angle);
+    }
+
+    public int Compare(Gate g0, Gate g1) {
+        Vector2 g0_pos = g0.transform.position;
+        Vector2 g1_pos = g1.transform.position;
+        Vector2 g0_relative = g0_pos - gate_pos;
+        Vector2 g1_relative = g1_pos - gate_pos;
+        float scale = 3.0f;
+        float g0_atan = Mathf.Atan2(g0_relative.y * scale, g0_relative.x);
+        float g1_atan = Mathf.Atan2(g1_relative.y * scale, g1_relative.x);
+        Debug.Log(Mathf.Atan2(g0_relative.y, g0_relative.x));
+        Debug.Log(g0_atan);
+        if (g0_relative.x < 0.0f) {
+            g0_atan = reverse_angle(g0_atan);
+        }
+        if (g1_relative.x < 0.0f) {
+            g1_atan = reverse_angle(g1_atan);
+        }
+
+        return g0_atan.CompareTo(g1_atan);
+    }
+}
+
 [ExecuteInEditMode]
 public abstract class Gate : MonoBehaviour {
     static int top_id = 0;
@@ -17,8 +60,10 @@ public abstract class Gate : MonoBehaviour {
 
     public GameObject connection_prefab;
     protected List<Connection> connections = new List<Connection>();
+    private Comp comp;
 
     private void Awake() {
+        comp = new Comp(transform.position);
         id = top_id;
         top_id++;
         if (connection_prefab == null) {
@@ -38,7 +83,8 @@ public abstract class Gate : MonoBehaviour {
     public abstract string serialise();
     
     public void draw_connections() {
-        incoming_neighbours.Sort(compare_neighbours);
+        comp.set_pos(transform.position);
+        incoming_neighbours.Sort(comp);
         for (int i = 0; i < incoming_neighbours.Count; i++) {
             connections[i].update(
                 incoming_neighbours[i].get_output_position(),
@@ -46,10 +92,6 @@ public abstract class Gate : MonoBehaviour {
                 incoming_neighbours[i].get_value()
             );
         }
-    }
-
-    static int compare_neighbours(Gate g0, Gate g1) {
-        return g0.transform.position.y.CompareTo(g1.transform.position.y);
     }
 
     public Vector2 get_input_position(int input_index, int input_num) {
