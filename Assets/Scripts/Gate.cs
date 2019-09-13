@@ -33,8 +33,6 @@ class Comp : IComparer<Gate> {
         float scale = 3.0f;
         float g0_atan = Mathf.Atan2(g0_relative.y * scale, g0_relative.x);
         float g1_atan = Mathf.Atan2(g1_relative.y * scale, g1_relative.x);
-        Debug.Log(Mathf.Atan2(g0_relative.y, g0_relative.x));
-        Debug.Log(g0_atan);
         if (g0_relative.x < 0.0f) {
             g0_atan = reverse_angle(g0_atan);
         }

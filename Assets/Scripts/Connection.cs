@@ -24,6 +24,14 @@ public class Connection : MonoBehaviour {
     }
 
     public void update_position(Vector2 input_pos, Vector2 output_pos) {
+        if (input_pos.x + 1.0f < output_pos.x) {
+            update_position_behind(input_pos, output_pos);
+        } else {
+            update_position_infront(input_pos, output_pos);
+        }
+    }
+
+    private void update_position_behind(Vector2 input_pos, Vector2 output_pos) {
         if (input_pos.Equals(rend.GetPosition(0)) && output_pos.Equals(rend.GetPosition(3))) {
             return;
         }
@@ -34,7 +42,33 @@ public class Connection : MonoBehaviour {
         Vector3 input_anchor = new Vector3(input_third_x, input_pos.y, 1.0f);
         Vector3 output_anchor = new Vector3(output_third_x, output_pos.y, 1.0f);
         rend.positionCount = 4;
-        rend.SetPositions(new Vector3[4] { input_pos_3d, input_anchor, output_anchor, output_pos_3d });
+        rend.SetPositions(new Vector3[4] {
+            input_pos_3d, input_anchor, output_anchor, output_pos_3d
+        });
+    }
+
+    private void update_position_infront(Vector2 input_pos, Vector2 output_pos) {
+        if (rend.positionCount >= 6) {
+            if (input_pos.Equals(rend.GetPosition(0)) && output_pos.Equals(rend.GetPosition(5))) {
+                return;
+            }
+        }
+        Vector3 corner_modifier = new Vector3(1.0f, 0.0f, 0.0f);
+        Vector3 anchor_modifier = new Vector3(1.0f, 1.0f, 0.0f);
+        if (output_pos.y < input_pos.y) {
+            corner_modifier.y *= -1;
+            anchor_modifier.y *= -1;
+        }
+        Vector3 input_pos_3d = new Vector3(input_pos.x, input_pos.y, 1.0f);
+        Vector3 output_pos_3d = new Vector3(output_pos.x, output_pos.y, 1.0f);
+        Vector3 input_corner = input_pos_3d + corner_modifier;
+        Vector3 output_corner = output_pos_3d - corner_modifier;
+        Vector3 input_anchor = input_pos_3d + anchor_modifier;
+        Vector3 output_anchor = output_pos_3d - anchor_modifier;
+        rend.positionCount = 6;
+        rend.SetPositions(new Vector3[6] {
+            input_pos_3d, input_corner, input_anchor, output_anchor, output_corner, output_pos_3d
+        });
     }
 
     public void update_colour(bool is_on_new) {
