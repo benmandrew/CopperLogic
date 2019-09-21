@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   default_sprite: {fileID: -9167919601972063614, guid: 464f3b4a87d174043ae6808caff151e0,
     type: 3}
-  selected_sprite: {fileID: -2487745053916608625, guid: 446cff4b7bdd35f4b8a99688f2d336d9,
+  clicked_sprite: {fileID: -2487745053916608625, guid: 446cff4b7bdd35f4b8a99688f2d336d9,
     type: 3}
 --- !u!212 &2365378781639815281
 SpriteRenderer:
