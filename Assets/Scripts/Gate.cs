@@ -59,6 +59,7 @@ public abstract class Gate : MonoBehaviour {
     public GameObject connection_prefab;
     protected List<Connection> connections = new List<Connection>();
     private Comp comp;
+    public bool changed = true;
 
     private void Awake() {
         comp = new Comp(transform.position);
@@ -104,6 +105,10 @@ public abstract class Gate : MonoBehaviour {
 
     public Vector2 get_relative_output_position(Vector2 other) {
         return get_output_position() - other;
+    }
+
+    public void delete_connection(Connection connection) {
+        connections.Remove(connection);
     }
 
     protected string internal_serialise(string type) {

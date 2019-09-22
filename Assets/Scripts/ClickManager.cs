@@ -53,6 +53,7 @@ public class ClickManager : MonoBehaviour {
         if (clicked_gate != null) {
             Vector2 mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clicked_gate.set_new_pos(mouse_pos);
+            clicked_gate.gate.changed = true;
         }
     }
 
@@ -64,23 +65,21 @@ public class ClickManager : MonoBehaviour {
     }
 
     private void mouse_two_down() {
-        Vector2 mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mouse_pos, Vector2.down);
+        Vector3 mouse_world_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mouse_world_pos, Vector2.zero);
         if (hit.collider != null) {
-            Debug.Log(hit.collider);
-            if (hit.collider.gameObject.GetComponent<Gate>() != null) {
+            Gate collided_gate = hit.collider.gameObject.GetComponent<Gate>();
+            if (collided_gate != null) {
                 gate_context_manager.open_menu(Input.mousePosition);
-            } else if (hit.collider.gameObject.GetComponent<Connection>() != null) {
-                connection_context_manager.open_menu(Input.mousePosition);
+                gate_context_manager.set_selected(collided_gate);
             }
         }
-        if (Physics.Raycast(mouse_pos, Vector3.forward, out RaycastHit hit_3d)) {
-            if (hit.collider != null) {
-                Debug.Log(hit.collider);
-                if (hit.collider.gameObject.GetComponent<Gate>() != null) {
-                    gate_context_manager.open_menu(Input.mousePosition);
-                } else if (hit.collider.gameObject.GetComponent<Connection>() != null) {
+        else if (Physics.Raycast(mouse_world_pos, Vector3.forward, out RaycastHit hit_3d)) {
+            if (hit_3d.collider != null) {
+                Connection collided_connection = hit_3d.collider.gameObject.GetComponent<Connection>();
+                if (collided_connection != null) {
                     connection_context_manager.open_menu(Input.mousePosition);
+                    connection_context_manager.set_selected(collided_connection);
                 }
             }
         }

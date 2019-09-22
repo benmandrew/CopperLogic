@@ -8,7 +8,9 @@ public class Connection : MonoBehaviour {
     
     private LineRenderer rend;
     private MeshCollider meshColl;
+    private Mesh temp_mesh;
     private bool is_on = false;
+    private Gate parent;
 
     private static Color on_colour = new_colour(146, 161, 122); // Meadow green
     private static Color off_colour = new_colour(255, 253, 240); // Pale white
@@ -19,13 +21,14 @@ public class Connection : MonoBehaviour {
         rend.endColor = off_colour;
         meshColl = GetComponent<MeshCollider>();
         meshColl.sharedMesh = new Mesh();
-        rend.BakeMesh(meshColl.sharedMesh, true);
     }
 
     public void update(Vector2 input_pos, Vector2 output_pos, bool is_on_new) {
         update_position(input_pos, output_pos);
         update_colour(is_on_new);
-        rend.BakeMesh(meshColl.sharedMesh, true);
+        temp_mesh = new Mesh();
+        rend.BakeMesh(temp_mesh, true);
+        meshColl.sharedMesh = temp_mesh;
     }
 
     public void update_position(Vector2 input_pos, Vector2 output_pos) {
@@ -94,6 +97,10 @@ public class Connection : MonoBehaviour {
 
     public void set_visibility(bool visible) {
         rend.enabled = visible;
+    }
+
+    public void delete_from_parent() {
+        parent.delete_connection(this);
     }
 
     private static Color new_colour(int r, int g, int b) {

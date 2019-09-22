@@ -60,7 +60,10 @@ public class Graph : MonoBehaviour {
     
     private void FixedUpdate() {
         for (int i = 0; i < gates.Count; i++) {
-            gates[i].draw_connections();
+            if (gates[i].changed) {
+                gates[i].draw_connections();
+                gates[i].changed = false;
+            }
         }
     }
 }

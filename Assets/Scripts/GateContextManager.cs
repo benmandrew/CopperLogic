@@ -14,7 +14,7 @@ public class GateContextManager : MonoBehaviour {
         offset = Vector2.Scale(rect.sizeDelta * 0.5f, new Vector2(1.0f, -1.0f)) + new Vector2(5.0f, -5.0f);
     }
 
-    public void set_selected_gate(Gate gate) {
+    public void set_selected(Gate gate) {
         selected_gate = gate;
     }
 
@@ -24,6 +24,7 @@ public class GateContextManager : MonoBehaviour {
     }
 
     public void close_menu() {
+        selected_gate = null;
         context_menu.SetActive(false);
     }
 }

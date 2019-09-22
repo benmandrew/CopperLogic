@@ -12,9 +12,11 @@ public class Draggable : MonoBehaviour
     public Sprite default_sprite;
     public Sprite clicked_sprite;
     private SpriteRenderer rend;
+    public Gate gate;
 
     public void Start() {
-        rend = gameObject.GetComponent<SpriteRenderer>();
+        rend = GetComponent<SpriteRenderer>();
+        gate = GetComponent<Gate>();
     }
 
     public void set_new_pos(Vector2 new_pos) {
