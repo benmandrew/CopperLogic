@@ -4,13 +4,15 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(LineRenderer))]
+[RequireComponent(typeof(MeshCollider))]
 public class Connection : MonoBehaviour {
     
     private LineRenderer rend;
     private MeshCollider meshColl;
     private Mesh temp_mesh;
     private bool is_on = false;
-    private Gate parent;
+    private Gate input_parent;
+    private Gate output_parent;
 
     private static Color on_colour = new_colour(146, 161, 122); // Meadow green
     private static Color off_colour = new_colour(255, 253, 240); // Pale white
@@ -21,6 +23,7 @@ public class Connection : MonoBehaviour {
         rend.endColor = off_colour;
         meshColl = GetComponent<MeshCollider>();
         meshColl.sharedMesh = new Mesh();
+        input_parent = transform.parent.GetComponent<Gate>();
     }
 
     public void update(Vector2 input_pos, Vector2 output_pos, bool is_on_new) {
@@ -99,8 +102,8 @@ public class Connection : MonoBehaviour {
         rend.enabled = visible;
     }
 
-    public void delete_from_parent() {
-        parent.delete_connection(this);
+    public void delete_from_parents() {
+        input_parent.delete_connection(this);
     }
 
     private static Color new_colour(int r, int g, int b) {

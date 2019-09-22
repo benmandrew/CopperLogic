@@ -21,8 +21,8 @@ public class ClickManager : MonoBehaviour {
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
             mouse_one_down();
-            gate_context_manager.close_menu();
-            connection_context_manager.close_menu();
+            gate_context_manager.close_menu_on_outside();
+            connection_context_manager.close_menu_on_outside();
         }
         if (Input.GetMouseButton(0)) {
             mouse_one_pressed();
@@ -31,8 +31,8 @@ public class ClickManager : MonoBehaviour {
             mouse_one_up();
         }
         if (Input.GetMouseButtonDown(1)) {
-            gate_context_manager.close_menu();
-            connection_context_manager.close_menu();
+            gate_context_manager.close_menu_on_outside();
+            connection_context_manager.close_menu_on_outside();
             mouse_two_down();
         }
     }

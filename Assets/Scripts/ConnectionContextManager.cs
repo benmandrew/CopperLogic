@@ -23,13 +23,24 @@ public class ConnectionContextManager : MonoBehaviour {
         context_menu.transform.position = mouse_pos + offset;
     }
 
-    public void close_menu() {
+    public void close_menu_on_outside() {
+        RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.zero);
+        if (hit.collider != null) {
+            if (hit.collider.tag == "ContextMenu") {
+                return;
+            }
+        }
+        close_menu();
+    }
+
+    private void close_menu() {
         selected_connection = null;
         context_menu.SetActive(false);
     }
 
     public void delete_connection() {
-        selected_connection.delete_from_parent();
+        selected_connection.delete_from_parents();
         Destroy(selected_connection.gameObject);
+        close_menu();
     }
 }
