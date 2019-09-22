@@ -85,8 +85,9 @@ public abstract class Gate : MonoBehaviour {
         incoming_neighbours.Sort(comp);
         for (int i = 0; i < incoming_neighbours.Count; i++) {
             connections[i].update(
-                incoming_neighbours[i].get_output_position(),
                 get_input_position(i, incoming_neighbours.Count),
+                incoming_neighbours[i].get_relative_output_position(
+                    transform.position),
                 incoming_neighbours[i].get_value()
             );
         }
@@ -94,11 +95,15 @@ public abstract class Gate : MonoBehaviour {
 
     public Vector2 get_input_position(int input_index, int input_num) {
         Vector2 array_offset = connection_array_max_offset * ((input_index - ((input_num - 1.0f) / 2.0f)) / input_num);
-        return new Vector2(transform.position.x, transform.position.y) - connection_offset + array_offset;
+        return array_offset - connection_offset;
     }
 
     public Vector2 get_output_position() {
         return new Vector2(transform.position.x, transform.position.y) + connection_offset;
+    }
+
+    public Vector2 get_relative_output_position(Vector2 other) {
+        return get_output_position() - other;
     }
 
     protected string internal_serialise(string type) {

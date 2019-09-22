@@ -34,12 +34,4 @@ public class Draggable : MonoBehaviour
         }
         being_dragged = is_selected;
     }
-
-    private void OnMouseOver() {
-
-    }
-
-    private void OnMouseExit() {
-
-    }
 }

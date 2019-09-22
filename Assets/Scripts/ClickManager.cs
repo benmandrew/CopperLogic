@@ -65,12 +65,23 @@ public class ClickManager : MonoBehaviour {
 
     private void mouse_two_down() {
         Vector2 mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mouse_pos, Vector2.zero);
+        RaycastHit2D hit = Physics2D.Raycast(mouse_pos, Vector2.down);
         if (hit.collider != null) {
+            Debug.Log(hit.collider);
             if (hit.collider.gameObject.GetComponent<Gate>() != null) {
                 gate_context_manager.open_menu(Input.mousePosition);
             } else if (hit.collider.gameObject.GetComponent<Connection>() != null) {
                 connection_context_manager.open_menu(Input.mousePosition);
+            }
+        }
+        if (Physics.Raycast(mouse_pos, Vector3.forward, out RaycastHit hit_3d)) {
+            if (hit.collider != null) {
+                Debug.Log(hit.collider);
+                if (hit.collider.gameObject.GetComponent<Gate>() != null) {
+                    gate_context_manager.open_menu(Input.mousePosition);
+                } else if (hit.collider.gameObject.GetComponent<Connection>() != null) {
+                    connection_context_manager.open_menu(Input.mousePosition);
+                }
             }
         }
     }
