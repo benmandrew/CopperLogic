@@ -53,7 +53,7 @@ public class Graph : MonoBehaviour {
         writer.Close();
     }
     
-    private void FixedUpdate() {
+    private void LateUpdate() {
         for (int i = 0; i < gates.Count; i++) {
             if (gates[i].changed) {
                 gates[i].draw_all_connections();
