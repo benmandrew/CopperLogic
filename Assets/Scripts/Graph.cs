@@ -11,11 +11,6 @@ public class Graph : MonoBehaviour {
     public Gate root;
 
     private void Start() {
-        /*
-        StreamReader reader = new StreamReader(Config.graph_file_path);
-        string json = reader.ReadToEnd();
-        reader.Close();
-        */
         if (Application.isPlaying) {
             get_gates();
         }
@@ -61,7 +56,7 @@ public class Graph : MonoBehaviour {
     private void FixedUpdate() {
         for (int i = 0; i < gates.Count; i++) {
             if (gates[i].changed) {
-                gates[i].draw_connections();
+                gates[i].draw_all_connections();
                 gates[i].changed = false;
             }
         }

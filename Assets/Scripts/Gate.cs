@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -52,12 +54,15 @@ public abstract class Gate : MonoBehaviour {
     public bool value = false;
     protected bool value_calculated = false;
     public List<Gate> incoming_neighbours;
+    public List<Gate> outgoing_neighbours;
+    private List<int> incoming_index;
 
     private Vector2 connection_offset = new Vector2(0.3f, 0.0f);
     private Vector2 connection_array_max_offset = new Vector2(0.0f, 1.0f);
 
     public GameObject connection_prefab;
-    protected List<Connection> connections = new List<Connection>();
+    protected List<Connection> incoming_connections = new List<Connection>();
+    protected List<Connection> outgoing_connections = new List<Connection>();
     private Comp comp;
     public bool changed = true;
 
@@ -70,9 +75,15 @@ public abstract class Gate : MonoBehaviour {
         }
         if (Application.isPlaying) {
             for (int i = 0; i < incoming_neighbours.Count; i++) {
-                GameObject connection_gameobject = Instantiate(connection_prefab, transform.position, Quaternion.identity);
-                connection_gameobject.transform.parent = transform;
-                connections.Add(connection_gameobject.GetComponent<Connection>());
+                Connection connection = Instantiate(
+                    connection_prefab,
+                    transform.position,
+                    Quaternion.identity
+                ).GetComponent<Connection>();
+                connection.transform.parent = transform;
+                incoming_connections.Add(connection);
+                incoming_neighbours[i].add_outgoing_connection(connection);
+                incoming_neighbours[i].add_outgoing_neighbour(this);
             }
         }
     }
@@ -81,17 +92,37 @@ public abstract class Gate : MonoBehaviour {
 
     public abstract string serialise();
     
-    public void draw_connections() {
-        comp.set_pos(transform.position);
-        incoming_neighbours.Sort(comp);
-        for (int i = 0; i < incoming_neighbours.Count; i++) {
-            connections[i].update(
-                get_input_position(i, incoming_neighbours.Count),
+    public void add_outgoing_neighbour(Gate gate) {
+        outgoing_neighbours.Add(gate);
+    }
+
+    public void draw_all_connections() {
+        draw_all_incoming_connections();
+        for (int i = 0; i < outgoing_neighbours.Count; i++) {
+            outgoing_neighbours[i].draw_all_incoming_connections();
+        }
+    }
+
+    public void draw_all_incoming_connections() {
+        sort_incoming_neighbours();
+        for (int i = 0; i < incoming_index.Count; i++) {
+            incoming_connections[i].update(
+                get_input_position(
+                    incoming_index[i],
+                    incoming_neighbours.Count),
                 incoming_neighbours[i].get_relative_output_position(
                     transform.position),
                 incoming_neighbours[i].get_value()
             );
         }
+    }
+
+    private void sort_incoming_neighbours() {
+        comp.set_pos(transform.position);
+        int[] permutation = Enumerable.Range(0, incoming_neighbours.Count).ToArray();
+        Gate[] gates = incoming_neighbours.ToArray();
+        Array.Sort(gates, permutation, comp);
+        incoming_index = permutation.ToList();
     }
 
     public Vector2 get_input_position(int input_index, int input_num) {
@@ -107,8 +138,41 @@ public abstract class Gate : MonoBehaviour {
         return get_output_position() - other;
     }
 
-    public void delete_connection(Connection connection) {
-        connections.Remove(connection);
+    public void add_outgoing_connection(Connection connection) {
+        outgoing_connections.Add(connection);
+    }
+
+    public void delete_incoming_connection(Connection connection) {
+        incoming_connections.Remove(connection);
+        for (int i = 0; i < incoming_neighbours.Count; i++) {
+            if (incoming_neighbours[i].outgoing_connections.Contains(connection)) {
+                Debug.Log(incoming_neighbours[i]);
+                incoming_neighbours.RemoveAt(i);
+            }
+        }
+    }
+
+    public void delete_all_connections() {
+        for (int i = 0; i < incoming_neighbours.Count; i++) {
+            Gate neighbour = incoming_neighbours[i];
+            for (int j = neighbour.outgoing_connections.Count - 1;  j >= 0; j--) {
+                Connection connection = neighbour.outgoing_connections[j];
+                if (incoming_connections.Contains(connection)) {
+                    incoming_connections.Remove(connection);
+                    incoming_neighbours.RemoveAt(i);
+                }
+            }
+        }
+        for (int i = 0; i < outgoing_neighbours.Count; i++) {
+            Gate neighbour = outgoing_neighbours[i];
+            for (int j = neighbour.incoming_connections.Count - 1; j >= 0; j--) {
+                Connection connection = neighbour.incoming_connections[j];
+                if (outgoing_connections.Contains(connection)) {
+                    outgoing_connections.Remove(connection);
+                    outgoing_neighbours.RemoveAt(i);
+                }
+            }
+        }
     }
 
     protected string internal_serialise(string type) {

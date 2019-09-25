@@ -37,4 +37,10 @@ public class GateContextManager : MonoBehaviour {
         selected_gate = null;
         context_menu.SetActive(false);
     }
+
+    public void delete_gate() {
+        selected_gate.delete_all_connections();
+        Destroy(selected_gate.gameObject);
+        close_menu();
+    }
 }

@@ -6,8 +6,8 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class NOTGate : Gate {
     public override bool get_value() {
-        if (incoming_neighbours.Count != 1) {
-            throw new System.Exception("NOT gate must have only one input");
+        if (incoming_neighbours.Count == 0) {
+            return false;
         }
         if (value_calculated) {
             return value;

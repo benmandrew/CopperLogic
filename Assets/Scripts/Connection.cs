@@ -35,7 +35,7 @@ public class Connection : MonoBehaviour {
     }
 
     public void update_position(Vector2 input_pos, Vector2 output_pos) {
-        if (input_pos.x - 1.0f > output_pos.x) {
+        if (input_pos.x - 2.0f > output_pos.x) {
             update_position_behind(input_pos, output_pos);
         } else {
             update_position_infront(input_pos, output_pos);
@@ -43,11 +43,6 @@ public class Connection : MonoBehaviour {
     }
 
     private void update_position_behind(Vector2 input_pos, Vector2 output_pos) {
-        if (rend.positionCount >= 4) {
-            if (output_pos.Equals(rend.GetPosition(3))) {
-                return;
-            }
-        }
         float input_third_x = (input_pos.x * 2 + output_pos.x) / 3;
         float output_third_x = (output_pos.x * 2 + input_pos.x) / 3;
         Vector3 input_pos_3d = new Vector3(input_pos.x, input_pos.y, 1.0f);
@@ -61,11 +56,6 @@ public class Connection : MonoBehaviour {
     }
 
     private void update_position_infront(Vector2 input_pos, Vector2 output_pos) {
-        if (rend.positionCount >= 6) {
-            if (output_pos.Equals(rend.GetPosition(5))) {
-                return;
-            }
-        }
         Vector3 corner_modifier = new Vector3(1.0f, 0.0f, 0.0f);
         Vector3 anchor_modifier = new Vector3(1.0f, -1.0f, 0.0f);
         if (output_pos.y < input_pos.y) {
@@ -103,7 +93,11 @@ public class Connection : MonoBehaviour {
     }
 
     public void delete_from_parents() {
-        input_parent.delete_connection(this);
+        input_parent.delete_incoming_connection(this);
+    }
+
+    public void add_to_output_parent(Gate gate) {
+        output_parent = gate;
     }
 
     private static Color new_colour(int r, int g, int b) {
