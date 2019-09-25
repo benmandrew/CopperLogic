@@ -158,8 +158,9 @@ public abstract class Gate : MonoBehaviour {
             for (int j = neighbour.outgoing_connections.Count - 1;  j >= 0; j--) {
                 Connection connection = neighbour.outgoing_connections[j];
                 if (incoming_connections.Contains(connection)) {
+                    neighbour.outgoing_connections.Remove(connection);
                     incoming_connections.Remove(connection);
-                    incoming_neighbours.RemoveAt(i);
+                    neighbour.outgoing_neighbours.Remove(this);
                 }
             }
         }
@@ -168,8 +169,10 @@ public abstract class Gate : MonoBehaviour {
             for (int j = neighbour.incoming_connections.Count - 1; j >= 0; j--) {
                 Connection connection = neighbour.incoming_connections[j];
                 if (outgoing_connections.Contains(connection)) {
+                    neighbour.incoming_connections.Remove(connection);
                     outgoing_connections.Remove(connection);
-                    outgoing_neighbours.RemoveAt(i);
+                    Destroy(connection.gameObject);
+                    neighbour.incoming_neighbours.Remove(this);
                 }
             }
         }
