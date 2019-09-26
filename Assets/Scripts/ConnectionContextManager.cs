@@ -23,7 +23,7 @@ public class ConnectionContextManager : MonoBehaviour {
         context_menu.transform.position = mouse_pos + offset;
     }
 
-    public void close_menu_on_outside() {
+    public void left_click() {
         RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.zero);
         if (hit.collider != null) {
             if (hit.collider.tag == "ContextMenu") {

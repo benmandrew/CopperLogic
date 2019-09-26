@@ -16,7 +16,7 @@ public class Graph : MonoBehaviour {
         }
     }
 
-    void get_gates() {
+    private void get_gates() {
         if (gate_container == null) {
             throw new System.Exception("Graph must be linked to the gate container!");
         }
@@ -27,16 +27,20 @@ public class Graph : MonoBehaviour {
         }
     }
 
-    bool get_value() {
+    public void remove_gate(Gate gate) {
+        gates.Remove(gate);
+    }
+
+    public bool get_value() {
         return root.get_value();
     }
 
-    void save_graph_to_file() {
+    public void save_graph_to_file() {
         string json = serialise();
         write_to_graph_file(json);
     }
 
-    string serialise() {
+    private string serialise() {
         string json = "[";
         for (int i = 0; i < gates.Count; i++) {
             if (i != 0) {
@@ -47,7 +51,7 @@ public class Graph : MonoBehaviour {
         return json + "]";
     }
 
-    void write_to_graph_file(string str) {
+    private void write_to_graph_file(string str) {
         StreamWriter writer = new StreamWriter(Config.graph_file_path);
         writer.WriteLine(str);
         writer.Close();

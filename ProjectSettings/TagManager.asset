@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Gate
   - ContextMenu
+  - Graph
   layers:
   - Default
   - TransparentFX

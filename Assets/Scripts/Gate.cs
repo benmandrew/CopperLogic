@@ -46,7 +46,7 @@ class Comp : IComparer<Gate> {
     }
 }
 
-[ExecuteInEditMode]
+
 public abstract class Gate : MonoBehaviour {
     static int top_id = 0;
 
@@ -80,6 +80,7 @@ public abstract class Gate : MonoBehaviour {
                     transform.position,
                     Quaternion.identity
                 ).GetComponent<Connection>();
+                connection.set_parent(this);
                 connection.transform.parent = transform;
                 incoming_connections.Add(connection);
                 incoming_neighbours[i].add_outgoing_connection(connection);
@@ -91,10 +92,6 @@ public abstract class Gate : MonoBehaviour {
     public abstract bool get_value();
 
     public abstract string serialise();
-    
-    public void add_outgoing_neighbour(Gate gate) {
-        outgoing_neighbours.Add(gate);
-    }
 
     public void draw_all_connections() {
         draw_all_incoming_connections();
@@ -138,15 +135,26 @@ public abstract class Gate : MonoBehaviour {
         return get_output_position() - other;
     }
 
+    public void add_outgoing_neighbour(Gate gate) {
+        outgoing_neighbours.Add(gate);
+    }
+
+    public void add_incoming_neighbour(Gate gate) {
+        incoming_neighbours.Add(gate);
+    }
+
     public void add_outgoing_connection(Connection connection) {
         outgoing_connections.Add(connection);
+    }
+
+    public void add_incoming_connection(Connection connection) {
+        incoming_connections.Add(connection);
     }
 
     public void delete_incoming_connection(Connection connection) {
         incoming_connections.Remove(connection);
         for (int i = 0; i < incoming_neighbours.Count; i++) {
             if (incoming_neighbours[i].outgoing_connections.Contains(connection)) {
-                Debug.Log(incoming_neighbours[i]);
                 incoming_neighbours.RemoveAt(i);
             }
         }

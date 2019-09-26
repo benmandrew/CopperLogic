@@ -17,13 +17,16 @@ public class Connection : MonoBehaviour {
     private static Color on_colour = new_colour(146, 161, 122); // Meadow green
     private static Color off_colour = new_colour(255, 253, 240); // Pale white
 
-    public void Start() {
+    public void Awake() {
         rend = GetComponent<LineRenderer>();
         rend.startColor = off_colour;
         rend.endColor = off_colour;
         meshColl = GetComponent<MeshCollider>();
         meshColl.sharedMesh = new Mesh();
-        input_parent = transform.parent.GetComponent<Gate>();
+    }
+
+    public void set_parent(Gate gate) {
+        input_parent = gate;
     }
 
     public void update(Vector2 input_pos, Vector2 output_pos, bool is_on_new) {

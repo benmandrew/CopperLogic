@@ -10,19 +10,23 @@ public class ClickManager : MonoBehaviour {
 
     public GameObject gate_context_menu;
     public GameObject connection_context_menu;
+    public GameObject background_scroller_object;
     private GateContextManager gate_context_manager;
     private ConnectionContextManager connection_context_manager;
+    private BackgroundScroller background_scroller;
 
     private void Start() {
         gate_context_manager = gate_context_menu.GetComponent<GateContextManager>();
         connection_context_manager = connection_context_menu.GetComponent<ConnectionContextManager>();
+        background_scroller = background_scroller_object.GetComponent<BackgroundScroller>();
     }
 
     private void Update() {
+        // Left click
         if (Input.GetMouseButtonDown(0)) {
             mouse_one_down();
-            gate_context_manager.close_menu_on_outside();
-            connection_context_manager.close_menu_on_outside();
+            gate_context_manager.left_click();
+            connection_context_manager.left_click();
         }
         if (Input.GetMouseButton(0)) {
             mouse_one_pressed();
@@ -30,10 +34,18 @@ public class ClickManager : MonoBehaviour {
         if (Input.GetMouseButtonUp(0)) {
             mouse_one_up();
         }
+        // Right click
         if (Input.GetMouseButtonDown(1)) {
-            gate_context_manager.close_menu_on_outside();
-            connection_context_manager.close_menu_on_outside();
+            gate_context_manager.left_click();
+            connection_context_manager.left_click();
             mouse_two_down();
+        }
+        // Middle click
+        if (Input.GetMouseButtonDown(2)) {
+            background_scroller.start_scroll();
+        }
+        if (Input.GetMouseButton(2)) {
+            background_scroller.scroll();
         }
     }
 
