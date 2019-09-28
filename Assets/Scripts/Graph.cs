@@ -8,7 +8,6 @@ using System.IO;
 public class Graph : MonoBehaviour {
     public GameObject gate_container;
     public List<Gate> gates;
-    public Gate root;
 
     private void Start() {
         if (Application.isPlaying) {
@@ -31,8 +30,10 @@ public class Graph : MonoBehaviour {
         gates.Remove(gate);
     }
 
-    public bool get_value() {
-        return root.get_value();
+    public void evaluate() {
+        for (int i = 0; i < gates.Count; i++) {
+            gates[i].get_value();
+        }
     }
 
     public void save_graph_to_file() {

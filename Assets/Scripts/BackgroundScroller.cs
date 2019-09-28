@@ -45,13 +45,13 @@ public class BackgroundScroller : MonoBehaviour {
 
         // Round to farthest plane boundary
         float min_x = Mathf.Floor((PLANE_SIZE * Mathf.Floor((
-            cam.transform.position.x - half_width - HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.x - half_width + HALF_PLANE_SIZE) / PLANE_SIZE)));
         float max_x = Mathf.Floor((PLANE_SIZE * Mathf.Ceil((
-            cam.transform.position.x + half_width + HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.x + half_width - HALF_PLANE_SIZE) / PLANE_SIZE)));
         float min_y = Mathf.Floor((PLANE_SIZE * Mathf.Floor((
-            cam.transform.position.x - half_height - HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.x - half_height + HALF_PLANE_SIZE) / PLANE_SIZE)));
         float max_y = Mathf.Floor((PLANE_SIZE * Mathf.Ceil((
-            cam.transform.position.x + half_height + HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.x + half_height - HALF_PLANE_SIZE) / PLANE_SIZE)));
 
         disable_backgrounds();
         int index = 0;
@@ -75,13 +75,13 @@ public class BackgroundScroller : MonoBehaviour {
         float half_width = half_height * cam.aspect;
         
         float min_x = Mathf.Floor((PLANE_SIZE * Mathf.Floor((
-            cam.transform.position.x - half_width - HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.x - half_width + HALF_PLANE_SIZE) / PLANE_SIZE)));
         float max_x = Mathf.Floor((PLANE_SIZE * Mathf.Ceil((
-            cam.transform.position.x + half_width + HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.x + half_width - HALF_PLANE_SIZE) / PLANE_SIZE)));
         float min_y = Mathf.Floor((PLANE_SIZE * Mathf.Floor((
-            cam.transform.position.x - half_height - HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.x - half_height + HALF_PLANE_SIZE) / PLANE_SIZE)));
         float max_y = Mathf.Floor((PLANE_SIZE * Mathf.Ceil((
-            cam.transform.position.x + half_height + HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.x + half_height - HALF_PLANE_SIZE) / PLANE_SIZE)));
 
         for (int x = (int)min_x; x <= (int)max_x; x += 10) {
             for (int y = (int)min_y; y <= (int)max_y; y += 10) {

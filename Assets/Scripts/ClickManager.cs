@@ -10,14 +10,18 @@ public class ClickManager : MonoBehaviour {
 
     public GameObject gate_context_menu;
     public GameObject connection_context_menu;
+    public GameObject spawn_context_menu;
     public GameObject background_scroller_object;
+
     private GateContextManager gate_context_manager;
     private ConnectionContextManager connection_context_manager;
+    private SpawnContextManager spawn_context_manager;
     private BackgroundScroller background_scroller;
 
     private void Start() {
         gate_context_manager = gate_context_menu.GetComponent<GateContextManager>();
         connection_context_manager = connection_context_menu.GetComponent<ConnectionContextManager>();
+        spawn_context_manager = spawn_context_menu.GetComponent<SpawnContextManager>();
         background_scroller = background_scroller_object.GetComponent<BackgroundScroller>();
     }
 
@@ -27,6 +31,7 @@ public class ClickManager : MonoBehaviour {
             mouse_one_down();
             gate_context_manager.left_click();
             connection_context_manager.left_click();
+            spawn_context_manager.left_click();
         }
         if (Input.GetMouseButton(0)) {
             mouse_one_pressed();
@@ -38,6 +43,7 @@ public class ClickManager : MonoBehaviour {
         if (Input.GetMouseButtonDown(1)) {
             gate_context_manager.left_click();
             connection_context_manager.left_click();
+            spawn_context_manager.left_click();
             mouse_two_down();
         }
         // Middle click
@@ -77,6 +83,7 @@ public class ClickManager : MonoBehaviour {
     }
 
     private void mouse_two_down() {
+        bool is_hit = false;
         Vector3 mouse_world_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mouse_world_pos, Vector2.zero);
         if (hit.collider != null) {
@@ -84,6 +91,7 @@ public class ClickManager : MonoBehaviour {
             if (collided_gate != null) {
                 gate_context_manager.open_menu(Input.mousePosition);
                 gate_context_manager.set_selected(collided_gate);
+                is_hit = true;
             }
         }
         else if (Physics.Raycast(mouse_world_pos, Vector3.forward, out RaycastHit hit_3d)) {
@@ -92,8 +100,12 @@ public class ClickManager : MonoBehaviour {
                 if (collided_connection != null) {
                     connection_context_manager.open_menu(Input.mousePosition);
                     connection_context_manager.set_selected(collided_connection);
+                    is_hit = true;
                 }
             }
+        }
+        if (!is_hit) {
+            spawn_context_manager.open_menu(Input.mousePosition);
         }
     }
 }

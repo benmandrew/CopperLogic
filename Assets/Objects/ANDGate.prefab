@@ -49,8 +49,10 @@ MonoBehaviour:
   id: 12
   value: 0
   incoming_neighbours: []
+  outgoing_neighbours: []
   connection_prefab: {fileID: 2382688235597207822, guid: 70d3856f1b1192d4ba69ebe44e93e463,
     type: 3}
+  changed: 1
 --- !u!114 &-6535592213278183331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +69,7 @@ MonoBehaviour:
     type: 3}
   clicked_sprite: {fileID: -6768165866092316388, guid: 446cff4b7bdd35f4b8a99688f2d336d9,
     type: 3}
+  gate: {fileID: 0}
 --- !u!212 &5873099746716729189
 SpriteRenderer:
   m_ObjectHideFlags: 0
