@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[ExecuteInEditMode]
-public class ANDGate : Gate {
+public class XORGate : Gate {
     private void Awake() {
         base.Awake();
-        gate_type = GateType.AND;
+        gate_type = GateType.XOR;
     }
 
     public override bool get_value() {
         if (!changed) {
             return value;
         }
-        if (incoming_neighbours.Count == 0) {
-            return false;
-        }
-        value = true;
+        value = false;
+        int count = 0;
         for (int i = 0; i < incoming_neighbours.Count; i++) {
-            value = value && incoming_neighbours[i].get_value();
+            count += incoming_neighbours[i].get_value() ? 1 : 0;
+        }
+        if (count == 1) {
+            value = true;
         }
         changed = false;
         return value;

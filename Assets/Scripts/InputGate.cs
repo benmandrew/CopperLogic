@@ -5,11 +5,12 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 public class InputGate : Gate {
-    public override bool get_value() {
-        return value;
+    private void Awake() {
+        base.Awake();
+        gate_type = GateType.Input;
     }
 
-    public override string serialise() {
-        return internal_serialise("Input");
+    public override bool get_value() {
+        return value;
     }
 }

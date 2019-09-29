@@ -7,11 +7,13 @@ public class ConnectionContextManager : MonoBehaviour {
     private Connection selected_connection = null;
     private GameObject context_menu;
     private Vector2 offset;
+    private Graph graph;
 
     private void Start() {
         context_menu = transform.GetChild(0).gameObject;
         RectTransform rect = context_menu.GetComponent<RectTransform>();
         offset = Vector2.Scale(rect.sizeDelta * 0.5f, new Vector2(1.0f, -1.0f)) + new Vector2(5.0f, -5.0f);
+        graph = GameObject.FindGameObjectWithTag("Graph").GetComponent<Graph>();
     }
 
     public void set_selected(Connection connection) {
@@ -33,7 +35,7 @@ public class ConnectionContextManager : MonoBehaviour {
         close_menu();
     }
 
-    private void close_menu() {
+    public void close_menu() {
         selected_connection = null;
         context_menu.SetActive(false);
     }
@@ -41,6 +43,7 @@ public class ConnectionContextManager : MonoBehaviour {
     public void delete_connection() {
         selected_connection.delete_from_parents();
         Destroy(selected_connection.gameObject);
+        graph.update_gates();
         close_menu();
     }
 }

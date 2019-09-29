@@ -98,9 +98,11 @@ public class ClickManager : MonoBehaviour {
             if (hit_3d.collider != null) {
                 Connection collided_connection = hit_3d.collider.gameObject.GetComponent<Connection>();
                 if (collided_connection != null) {
-                    connection_context_manager.open_menu(Input.mousePosition);
-                    connection_context_manager.set_selected(collided_connection);
-                    is_hit = true;
+                    if (!collided_connection.is_temporary) {
+                        connection_context_manager.open_menu(Input.mousePosition);
+                        connection_context_manager.set_selected(collided_connection);
+                        is_hit = true;
+                    }
                 }
             }
         }

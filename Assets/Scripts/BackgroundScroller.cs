@@ -17,8 +17,7 @@ public class BackgroundScroller : MonoBehaviour {
 
     public GameObject background_prefab;
     private List<GameObject> backgrounds;
-    private int last_background = 0;
-
+    
     // Start is called before the first frame update
     void Awake() {
         cam = transform.parent.GetComponent<Camera>();
@@ -44,20 +43,19 @@ public class BackgroundScroller : MonoBehaviour {
         float half_width = half_height * cam.aspect;
 
         // Round to farthest plane boundary
-        float min_x = Mathf.Floor((PLANE_SIZE * Mathf.Floor((
-            cam.transform.position.x - half_width + HALF_PLANE_SIZE) / PLANE_SIZE)));
-        float max_x = Mathf.Floor((PLANE_SIZE * Mathf.Ceil((
-            cam.transform.position.x + half_width - HALF_PLANE_SIZE) / PLANE_SIZE)));
-        float min_y = Mathf.Floor((PLANE_SIZE * Mathf.Floor((
-            cam.transform.position.x - half_height + HALF_PLANE_SIZE) / PLANE_SIZE)));
-        float max_y = Mathf.Floor((PLANE_SIZE * Mathf.Ceil((
-            cam.transform.position.x + half_height - HALF_PLANE_SIZE) / PLANE_SIZE)));
+        float min_x = Mathf.Floor((PLANE_SIZE * Mathf.Floor(-half_width / PLANE_SIZE)));
+        float max_x = Mathf.Floor((PLANE_SIZE * Mathf.Ceil(half_width / PLANE_SIZE)));
+        float min_y = Mathf.Floor((PLANE_SIZE * Mathf.Floor(- half_height / PLANE_SIZE)));
+        float max_y = Mathf.Floor((PLANE_SIZE * Mathf.Ceil(half_height / PLANE_SIZE)));
 
         disable_backgrounds();
         int index = 0;
         for (int x = (int)min_x; x <= (int)max_x; x += 10) {
             for (int y = (int)min_y; y <= (int)max_y; y += 10) {
-                backgrounds[index].transform.position = new Vector3(x, y, 20.0f);
+                backgrounds[index].transform.position = new Vector3(
+                    x + cam.transform.position.x,
+                    y + cam.transform.position.y,
+                    20.0f);
                 backgrounds[index].SetActive(true);
                 index++;
             }
@@ -75,13 +73,13 @@ public class BackgroundScroller : MonoBehaviour {
         float half_width = half_height * cam.aspect;
         
         float min_x = Mathf.Floor((PLANE_SIZE * Mathf.Floor((
-            cam.transform.position.x - half_width + HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.x - half_width) / PLANE_SIZE)));
         float max_x = Mathf.Floor((PLANE_SIZE * Mathf.Ceil((
-            cam.transform.position.x + half_width - HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.x + half_width) / PLANE_SIZE)));
         float min_y = Mathf.Floor((PLANE_SIZE * Mathf.Floor((
-            cam.transform.position.x - half_height + HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.y - half_height) / PLANE_SIZE)));
         float max_y = Mathf.Floor((PLANE_SIZE * Mathf.Ceil((
-            cam.transform.position.x + half_height - HALF_PLANE_SIZE) / PLANE_SIZE)));
+            cam.transform.position.y + half_height) / PLANE_SIZE)));
 
         for (int x = (int)min_x; x <= (int)max_x; x += 10) {
             for (int y = (int)min_y; y <= (int)max_y; y += 10) {

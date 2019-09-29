@@ -1,19 +1,7 @@
 fileFormatVersion: 2
-guid: 446cff4b7bdd35f4b8a99688f2d336d9
+guid: ffa789eb5302b3f4fb035bc8f0a5a421
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -6768165866092316388
-    second: gate_and_selected
-  - first:
-      213: -3836859764849012407
-    second: gate_not_selected
-  - first:
-      213: -1358068974520617788
-    second: gate_input_selected
-  - first:
-      213: -2487745053916608625
-    second: gates_or_selected
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -43,7 +31,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: -1
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -52,12 +40,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 300
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -108,91 +96,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: gate_and_selected
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 65
-        width: 62
-        height: 62
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 88c9448bd32c7f544a382d5e5a9bf9a7
-      internalID: -6768165866092316388
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gate_not_selected
-      rect:
-        serializedVersion: 2
-        x: 65
-        y: 65
-        width: 62
-        height: 62
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a26fb981d1cc58044a433fd2f59f593a
-      internalID: -3836859764849012407
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gate_input_selected
-      rect:
-        serializedVersion: 2
-        x: 6
-        y: 1
-        width: 52
-        height: 62
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d59f6f8d775b4644f9790bb209ec6f18
-      internalID: -1358068974520617788
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gates_or_selected
-      rect:
-        serializedVersion: 2
-        x: 65
-        y: 6
-        width: 60
-        height: 52
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 49cd27f94aba0724ca1c2e1ae9dc6042
-      internalID: -2487745053916608625
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []

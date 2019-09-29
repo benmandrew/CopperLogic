@@ -5,6 +5,14 @@ using System.Linq;
 using UnityEngine;
 
 
+public enum GateType {
+    AND,
+    OR,
+    XOR,
+    NOT,
+    Input
+}
+
 class Comp : IComparer<Gate> {
 
     private Vector2 gate_pos;
@@ -52,7 +60,6 @@ public abstract class Gate : MonoBehaviour {
 
     public int id;
     public bool value = false;
-    protected bool value_calculated = false;
     public List<Gate> incoming_neighbours;
     public List<Gate> outgoing_neighbours;
     private List<int> incoming_index;
@@ -64,10 +71,16 @@ public abstract class Gate : MonoBehaviour {
     protected List<Connection> incoming_connections = new List<Connection>();
     protected List<Connection> outgoing_connections = new List<Connection>();
     private Comp comp;
+    public GateType gate_type;
     public bool changed = true;
 
-    private void Awake() {
+    private static Color on_colour = new_colour(146, 161, 122); // Meadow Green
+    private static Color off_colour = new_colour(255, 255, 255); // White
+    private SpriteRenderer rend;
+
+    protected void Awake() {
         comp = new Comp(transform.position);
+        rend = GetComponent<SpriteRenderer>();
         id = top_id;
         top_id++;
         if (connection_prefab == null) {
@@ -91,13 +104,12 @@ public abstract class Gate : MonoBehaviour {
 
     public abstract bool get_value();
 
-    public abstract string serialise();
-
     public void draw_all_connections() {
         draw_all_incoming_connections();
         for (int i = 0; i < outgoing_neighbours.Count; i++) {
             outgoing_neighbours[i].draw_all_incoming_connections();
         }
+        set_colour(get_value());
     }
 
     public void draw_all_incoming_connections() {
@@ -111,6 +123,14 @@ public abstract class Gate : MonoBehaviour {
                     transform.position),
                 incoming_neighbours[i].get_value()
             );
+        }
+    }
+
+    private void set_colour(bool is_on) {
+        if (is_on) {
+            rend.color = on_colour;
+        } else {
+            rend.color = off_colour;
         }
     }
 
@@ -186,21 +206,7 @@ public abstract class Gate : MonoBehaviour {
         }
     }
 
-    protected string internal_serialise(string type) {
-        string json = (
-            "{\"id\": \"" +
-            id.ToString() +
-            "\",\"type\": \"" +
-            type +
-            "\",\"edge_ids\": ["
-        );
-        for (int i = 0; i < incoming_neighbours.Count; i++) {
-            if (i != 0) {
-                json += ", ";
-            }
-            json += incoming_neighbours[i].id.ToString();
-        }
-
-        return json + "]}";
+    private static Color new_colour(int r, int g, int b) {
+        return new Color(r / 255.0f, g / 255.0f, b / 255.0f);
     }
 }

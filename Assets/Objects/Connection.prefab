@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a75a6a6ddaf244fa03b18dccc8ad73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  is_temporary: 0
 --- !u!120 &1235091921871313100
 LineRenderer:
   m_ObjectHideFlags: 0

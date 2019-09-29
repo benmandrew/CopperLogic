@@ -49,8 +49,11 @@ MonoBehaviour:
   id: 14
   value: 0
   incoming_neighbours: []
+  outgoing_neighbours: []
   connection_prefab: {fileID: 2382688235597207822, guid: 70d3856f1b1192d4ba69ebe44e93e463,
     type: 3}
+  gate_type: 3
+  changed: 1
 --- !u!114 &1042535365442274535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,10 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589149af1f95b2643bbdfbd362674def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  default_sprite: {fileID: -6852310275384767616, guid: 464f3b4a87d174043ae6808caff151e0,
-    type: 3}
-  clicked_sprite: {fileID: -3836859764849012407, guid: 446cff4b7bdd35f4b8a99688f2d336d9,
-    type: 3}
+  sprite: {fileID: 21300000, guid: 1cfec90adfacd364da36ee77fcbb8645, type: 3}
+  gate: {fileID: 0}
 --- !u!212 &7647845828967941443
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -105,13 +106,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6852310275384767616, guid: 464f3b4a87d174043ae6808caff151e0,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1cfec90adfacd364da36ee77fcbb8645, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.6, y: 0.62}
+  m_Size: {x: 1.56, y: 1.53}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -134,8 +134,8 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.24, y: 1.24}
-    newSize: {x: 0.6, y: 0.62}
+    oldSize: {x: 1.56, y: 1.53}
+    newSize: {x: 1.56, y: 1.53}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

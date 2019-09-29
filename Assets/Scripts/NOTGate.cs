@@ -5,19 +5,20 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 public class NOTGate : Gate {
+    private void Awake() {
+        base.Awake();
+        gate_type = GateType.NOT;
+    }
+
     public override bool get_value() {
         if (incoming_neighbours.Count == 0) {
             return false;
         }
-        if (value_calculated) {
+        if (!changed) {
             return value;
         }
         value = !incoming_neighbours[0].get_value();
-        value_calculated = true;
+        changed = false;
         return value;
-    }
-
-    public override string serialise() {
-        return internal_serialise("NOT");
     }
 }

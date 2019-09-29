@@ -6,6 +6,7 @@ public class SpawnContextManager : MonoBehaviour {
 
     public GameObject and_gate_prefab;
     public GameObject or_gate_prefab;
+    public GameObject xor_gate_prefab;
     public GameObject not_gate_prefab;
     public GameObject input_gate_prefab;
 
@@ -49,6 +50,7 @@ public class SpawnContextManager : MonoBehaviour {
             Quaternion.identity);
         graph.gates.Add(gate.GetComponent<Gate>());
         gate.transform.parent = graph.gate_container.transform;
+        graph.update_gates();
         context_menu.SetActive(false);
     }
 
@@ -58,6 +60,10 @@ public class SpawnContextManager : MonoBehaviour {
 
     public void spawn_or_gate() {
         spawn_gate(or_gate_prefab);
+    }
+
+    public void spawn_xor_gate() {
+        spawn_gate(xor_gate_prefab);
     }
 
     public void spawn_not_gate() {

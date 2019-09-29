@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[ExecuteInEditMode]
 public class ORGate : Gate {
+    private void Awake() {
+        base.Awake();
+        gate_type = GateType.OR;
+    }
+
     public override bool get_value() {
-        if (value_calculated) {
+        if (!changed) {
             return value;
         }
         value = false;
         for (int i = 0; i < incoming_neighbours.Count; i++) {
             value = value || incoming_neighbours[i].get_value();
         }
-        value_calculated = true;
+        changed = false;
         return value;
-    }
-    
-    public override string serialise() {
-        return internal_serialise("OR");
     }
 }

@@ -11,6 +11,7 @@ public class Connection : MonoBehaviour {
     private MeshCollider meshColl;
     private Mesh temp_mesh;
     private bool is_on = false;
+    public bool is_temporary = false;
     private Gate input_parent;
     private Gate output_parent;
 
@@ -33,7 +34,7 @@ public class Connection : MonoBehaviour {
         update_position(input_pos, output_pos);
         update_colour(is_on_new);
         temp_mesh = new Mesh();
-        rend.BakeMesh(temp_mesh, true);
+        //rend.BakeMesh(temp_mesh, true);
         meshColl.sharedMesh = temp_mesh;
     }
 
