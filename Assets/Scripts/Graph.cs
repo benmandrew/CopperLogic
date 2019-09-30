@@ -4,7 +4,6 @@ using UnityEngine;
 using System.IO;
 
 
-[ExecuteInEditMode]
 public class Graph : MonoBehaviour {
     public GameObject gate_container;
     public List<Gate> gates;

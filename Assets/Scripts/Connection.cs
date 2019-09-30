@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(LineRenderer))]
-[RequireComponent(typeof(MeshCollider))]
 public class Connection : MonoBehaviour {
     
     private LineRenderer rend;
@@ -34,7 +32,7 @@ public class Connection : MonoBehaviour {
         update_position(input_pos, output_pos);
         update_colour(is_on_new);
         temp_mesh = new Mesh();
-        //rend.BakeMesh(temp_mesh, true);
+        rend.BakeMesh(temp_mesh, false);
         meshColl.sharedMesh = temp_mesh;
     }
 

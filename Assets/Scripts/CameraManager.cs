@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CameraManager : MonoBehaviour {
 
     public readonly float MAX_ZOOM = 10.0f;

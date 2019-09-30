@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ConnectionContextManager : MonoBehaviour {
 
     private Connection selected_connection = null;

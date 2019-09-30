@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[ExecuteInEditMode]
 public class InputGate : Gate {
     private void Awake() {
         base.Awake();

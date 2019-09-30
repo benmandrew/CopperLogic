@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BackgroundScroller : MonoBehaviour {
 
     private float SCROLL_SCALE = 0.05f;
