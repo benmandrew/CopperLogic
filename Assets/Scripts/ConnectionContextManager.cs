@@ -12,6 +12,7 @@ public class ConnectionContextManager : MonoBehaviour {
 
     private void Start() {
         context_menu = transform.GetChild(0).gameObject;
+        context_menu.SetActive(false);
         RectTransform rect = context_menu.GetComponent<RectTransform>();
         offset = Vector2.Scale(rect.sizeDelta * 0.5f, new Vector2(1.0f, -1.0f)) + new Vector2(5.0f, -5.0f);
         graph = GameObject.FindGameObjectWithTag("Graph").GetComponent<Graph>();
